@@ -1,8 +1,8 @@
 import dotenv from 'dotenv'; dotenv.config()
+import glob from 'glob'
 import { Bot as BaseBot, session } from 'grammy'
 import { conversations } from '@grammyjs/conversations'
 import { apiThrottler } from '@grammyjs/transformer-throttler'
-import { Autoload } from './autoload.js'
 import { run } from '@grammyjs/runner'
 import { Log } from './log.js'
 import { Bot } from './bot.js'
@@ -10,6 +10,17 @@ import { Bot } from './bot.js'
 const bot = new BaseBot(process.env.TOKEN)
 Bot.init(bot)
 
+
+function Autoload (path) {
+    try {
+        return glob.sync(path, {
+            ignore: '**/index.js'
+        })
+            .map(file => file.replace('src', '../'))
+    } catch (e) {
+        Log.err(e)
+    }
+}
 
 function app () {
     try {

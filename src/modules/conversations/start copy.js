@@ -1,13 +1,12 @@
 import { Menu } from "@grammyjs/menu"
 import { Bot, Scene } from "../../core/index.js";
 
-const target = 'stats'
+const target = 'start'
 
 async function scene (conv, ctx) {
-    await ctx.reply(`your name?`, { reply_markup: menu })
-
-    const { message } = await conv.wait();
-    await ctx.reply(`hello ${message.text}`)
+    await ctx.reply(`stats:
+${ctx.session}
+    `, { reply_markup: menu })
 }
 
 
@@ -19,7 +18,7 @@ const login = new Menu('login')
     .back("назад")
 
 
-const menu = new Menu(target)
+const menu = new Menu('start')
     .submenu("ввести ключ", "login")
     .webApp('сайт', 'https://master-market.shop/')
 
