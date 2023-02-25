@@ -10,6 +10,7 @@
     "dotenv": "^16.0.3",
     "glob": "^8.1.0",
     "grammy": "^1.14.1",
+    "ora": "^6.1.2",
     "pretty-error": "^4.0.0"
   },
   "scripts": {

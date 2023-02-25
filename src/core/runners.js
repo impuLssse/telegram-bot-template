@@ -43,10 +43,10 @@ function app () {
 
 function modules () {
     try {
-        const convers = Autoload('**/modules/**/**.js')
+        const convers = Autoload('*/modules/**/**.js')
         convers.forEach(async file => await import(file))
 
-        return true
+        return convers.length ? true : false
     } catch (e) {
         Log.err(e)
     }

@@ -1,15 +1,11 @@
-import c from 'colors'
 
 // core functions
 import { Log, runner } from './core/index.js'
 
 const bot = runner.bot
 
-try {
-    if (runner.app()) new Log('[BOT] started')
-    if (runner.modules()) new Log('[MODULES] imported')
-} catch (e) {
-    Log.err(e)
-}
+
+Log.loading(runner.app, 'BOT', 'start')
+Log.loading(runner.modules, 'MODULES', 'import')
 
 export default bot
