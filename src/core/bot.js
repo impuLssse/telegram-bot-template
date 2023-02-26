@@ -1,11 +1,6 @@
 import { Composer, session } from 'grammy'
 import { createConversation } from '@grammyjs/conversations'
 
-// bot.api.setMyCommands([
-//     { command: "start", description: "запуск" },
-//     { command: "stats", description: "статистика" },
-//     { command: "help", description: "нужна помощь с товаром?" },
-// ])
 
 class Bot {
     static init (bot) {

@@ -2,6 +2,7 @@ import dotenv from 'dotenv'; dotenv.config()
 import glob from 'glob'
 import { Bot as BaseBot, session } from 'grammy'
 import { conversations } from '@grammyjs/conversations'
+import { parseMode, hydrateReply } from '@grammyjs/parse-mode'
 import { apiThrottler } from '@grammyjs/transformer-throttler'
 import { run } from '@grammyjs/runner'
 import { Log } from './log.js'
@@ -26,6 +27,13 @@ function app () {
     try {
         bot.catch(e => Log.err(e))
         bot.api.config.use(apiThrottler())
+        bot.api.config.use(parseMode('HTML'))
+
+        bot.api.setMyCommands([
+            { command: "start", description: "запуск" },
+            { command: "reload", description: "перезапуск" },
+        ])
+
     
         Bot
             .reg(session({ initial: () => ({
@@ -34,6 +42,8 @@ function app () {
                 counter: 0,
             })}))
             .reg(conversations())
+            .reg(hydrateReply)
+            .cmd('start')
         
         return run(bot).isRunning()
     } catch (e) {
@@ -52,4 +62,13 @@ function modules () {
     }
 }
 
-export const runner = { bot, app, modules }
+function connect () {
+    try {
+        return true
+    } catch (e) {
+        Log.err(e)
+    }
+}
+
+export const runner = { app, modules, connect }
+export default bot

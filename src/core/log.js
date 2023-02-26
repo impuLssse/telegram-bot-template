@@ -40,7 +40,7 @@ class Log {
 
         const spinner = ora({
             text: !word ? status.action : statusWithOneWord.action,
-            indent: 5,
+            indent: 2,
             spinner: 'fistBump', // 'fistBump', 'clock', 'aesthetic'
             color: 'blue',
         }).start()
